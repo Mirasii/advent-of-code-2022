@@ -10,4 +10,5 @@ CrZsJsPPZsGzwwsLwLmpwMDw`;
 test("day3", () => {
     const result = day3(input);
     expect(result.partOne).toBe(157);
+    expect(result.partTwo).toBe(70);
 });
