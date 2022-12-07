@@ -1,14 +1,17 @@
 const matchup = require('./day2.json');
-const opposMatchup = require('./day2opp.json');
 function day2(input) {
-    var matches = input.replaceAll('\r', '').split('\n');
+    var matches = input.replaceAll('\r', '')
+        .replaceAll('A', '1').replaceAll('X', '1')
+        .replaceAll('B', '2').replaceAll('Y', '2')
+        .replaceAll('C', '3').replaceAll('Z', '3')
+        .split('\n');
     var score = 0;
     var determined = 0;
     for (var match of matches) {
         var opponent = match.split(' ')[0];
         var proponent = match.split(' ')[1];
         var choices = matchup[proponent];
-        var inverse = opposMatchup[opponent];
+        var inverse = matchup[opponent];
         //part1
         if (choices.beats == opponent) {
             score += choices.points + 6;
