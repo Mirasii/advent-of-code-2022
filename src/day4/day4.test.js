@@ -10,5 +10,5 @@ let input = `2-4,6-8
 test("day4", () => {
     const result = day4(input);
     expect(result.partOne).toBe(2);
-    expect(result.partTwo).toBe(null);
+    expect(result.partTwo).toBe(4);
 });
