@@ -3,7 +3,7 @@ const parts = require('./day6.json');
 function day6(input) {
     var index = 0;
     var keys = Object.keys(parts);
-    var resultObj = keys.reduce((object, key) => { object[key] = null; return object; }, {});
+    var resultObj = keys.reduce((o, k) => { o[k] = null; return o; }, {});
     while (Object.values(resultObj).some(element => element === null)) {
         for (var key of keys) {
             if (resultObj[key] === null) {
