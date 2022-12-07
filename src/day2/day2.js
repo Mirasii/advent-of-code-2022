@@ -5,9 +5,8 @@ function day2(input) {
     var score = 0;
     var determined = 0;
     for (var match of matches) {
-        var choices = match.split(' ');
-        var opponent = choices[0];
-        var proponent = choices[1];
+        var opponent = match.split(' ')[0];
+        var proponent = match.split(' ')[1];
         var choices = matchup[proponent];
         var inverse = opposMatchup[opponent];
         //part1
