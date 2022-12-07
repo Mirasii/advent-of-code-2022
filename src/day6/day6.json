@@ -1,0 +1,10 @@
+{
+    "partOne": {
+        "indicator": 4,
+        "type": "data"
+    },
+    "partTwo": {
+        "indicator": 14,
+        "type": "message"
+    }
+}

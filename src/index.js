@@ -9,8 +9,10 @@ const daysToRun = [
 ];
 
 daysToRun.forEach((day) => {
+    var start = new Date();
     const name = day.name;
     const input = readFileSync(`./src/inputs/${name}`).toString();
     const result = day(input);
-    console.log(`${name}:\n${result.partOne}\n${result.partTwo}\n`);
+    console.log(`${name}:\n${result.partOne}\n${result.partTwo}`);
+    console.log(`operational runtime: ${new Date() - start}ms\n`)
 });
