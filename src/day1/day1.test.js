@@ -17,6 +17,6 @@ let input = `1000
 
 test("day1", () => {
     const result = day1(input);
-    expect(result.partOne).toBe(24000);
-    expect(result.partTwo).toBe(45000);
+    expect(result.partOne).toBe(`elf 4 had the most with a total of 24000`);
+    expect(result.partTwo).toBe(`elves 4, 3 and 5 were the top 3 with a combined total of 45000`);
 });
