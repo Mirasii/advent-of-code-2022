@@ -16,7 +16,7 @@ let input = `1000
 10000`;
 
 test("day1", () => {
-  const result = day1(input);
-  expect(result.partOne).toBe(24000);
-  expect(result.partTwo).toBe(45000);
+    const result = day1(input);
+    expect(result.partOne).toBe(24000);
+    expect(result.partTwo).toBe(45000);
 });
