@@ -2,11 +2,10 @@ const parts = require('./day6.json');
 
 function day6(input) {
     var index = 0;
-    var resultObj = {};
     var keys = Object.keys(parts);
-    for (var key of keys) {
-        resultObj[key] = null;
-    }
+    var resultObj = {};
+    keys.forEach(key => resultObj[key] = null);
+
     while (Object.values(resultObj).some(element => element === null)) {
         for (var key of keys) {
             if (resultObj[key] === null) {
