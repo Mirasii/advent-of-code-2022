@@ -1,9 +1,9 @@
 const matchup = require('./day2.json');
 function day2(input) {
     var matches = input.replaceAll('\r', '')
-        .replaceAll('A', '1').replaceAll('X', '1')
-        .replaceAll('B', '2').replaceAll('Y', '2')
-        .replaceAll('C', '3').replaceAll('Z', '3')
+        .replaceAll('A', '1').replaceAll('X', '1') //Rock
+        .replaceAll('B', '2').replaceAll('Y', '2') //Paper
+        .replaceAll('C', '3').replaceAll('Z', '3') //Scizzors
         .split('\n');
     var score = 0;
     var determined = 0;
