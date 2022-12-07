@@ -18,10 +18,9 @@ function day3(input) {
             const badge = new Set(ruck1.filter(value => ruck2.includes(value)).filter(value => ruck3.includes(value)));
             badgeSum += getPriority(badge);
             groupArray = [];
-            counter = 1;
-        } else {
-            counter++;
+            counter = 0;
         }
+        counter++;
     }
     return {
         "partOne": prioritySum,
