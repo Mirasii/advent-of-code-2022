@@ -11,5 +11,6 @@ const daysToRun = [
 daysToRun.forEach((day) => {
     const name = day.name;
     const input = readFileSync(`./src/inputs/${name}`).toString();
-    console.log(`${name}:`, day(input));
+    const result = day(input);
+    console.log(`${name}:\n${result.partOne}\n${result.partTwo}\n`);
 });
