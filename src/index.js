@@ -6,6 +6,7 @@ const { day6 } = require("./day6/day6.js");
 const daysToRun = [
     day1,
     day2,
+    day3,
     day6
     // add additional days here
 ];
