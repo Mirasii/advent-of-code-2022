@@ -16,7 +16,9 @@ function day5(input) {
         .map((a) => groupByFour(a))
         .map((a) => a.map((b) => b[1]))
         .reverse();
+    //Transpose Matrix
     crateMatrix = crateMatrix[0].map((_, colIndex) => crateMatrix.map((row) => row[colIndex]));
+    //Filter blanks
     crateMatrix = crateMatrix.map((a) => a.filter((b) => b !== " "));
     const moveRegex = /move (\d+) from (\d+) to (\d+)/;
     const moves = rawData[1]
