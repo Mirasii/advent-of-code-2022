@@ -12,13 +12,13 @@ function day3(input) {
         const commonItems = new Set(comp1.filter(value => comp2.includes(value)));
         prioritySum += getPriority(commonItems);
         if (counter == 3) {
+            counter = 0;
             var ruck1 = groupArray[0].split('');
             var ruck2 = groupArray[1].split('');
             var ruck3 = groupArray[2].split('');
             const badge = new Set(ruck1.filter(value => ruck2.includes(value)).filter(value => ruck3.includes(value)));
             badgeSum += getPriority(badge);
             groupArray = [];
-            counter = 0;
         }
         counter++;
     }
