@@ -1,9 +1,11 @@
 const { readFileSync } = require("fs");
 const { day1 } = require("./day1/day1.js");
+const { day2 } = require("./day2/day2.js");
 const { day6 } = require("./day6/day6.js");
 
 const daysToRun = [
     day1,
+    day2,
     day6
     // add additional days here
 ];

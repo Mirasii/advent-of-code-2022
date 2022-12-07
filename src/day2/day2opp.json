@@ -1,0 +1,17 @@
+{
+    "A": {
+        "beats": "Z",
+        "loses": "Y",
+        "draws": "X"
+    },
+    "B": {
+        "beats": "X",
+        "loses": "Z",
+        "draws": "Y"
+    },
+    "C": {
+        "beats": "Y",
+        "loses": "X",
+        "draws": "Z"
+    }
+}

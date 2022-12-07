@@ -1,0 +1,20 @@
+{
+    "X": {
+        "beats": "C",
+        "loses": "B",
+        "points": 1,
+        "outcome": "lose"
+    },
+    "Y": {
+        "beats": "A",
+        "loses": "C",
+        "points": 2,
+        "outcome": "draw"
+    },
+    "Z": {
+        "beats": "B",
+        "loses": "A",
+        "points": 3,
+        "outcome": "win"
+    }
+}
