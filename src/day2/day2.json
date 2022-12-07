@@ -1,0 +1,23 @@
+{
+    "1": {
+        "beats": "3",
+        "loses": "2",
+        "draws": "1",
+        "points": 1,
+        "outcome": "lose"
+    },
+    "2": {
+        "beats": "1",
+        "loses": "3",
+        "draws": "2",
+        "points": 2,
+        "outcome": "draw"
+    },
+    "3": {
+        "beats": "2",
+        "loses": "1",
+        "draws": "3",
+        "points": 3,
+        "outcome": "win"
+    }
+}
