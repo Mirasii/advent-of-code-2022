@@ -38,5 +38,4 @@ function day2(input) {
 
 module.exports = {
     day2,
-    // Note: you can add helper functions for testing within .test.js here if you wish
 };

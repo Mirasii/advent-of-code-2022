@@ -24,6 +24,5 @@ function checkSubstring(string, index, buffer, type) {
 
 module.exports = {
     day6,
-    // Note: you can add helper functions for testing within .test.js here if you wish
 };
 
