@@ -11,7 +11,8 @@ function day7(input) {
     var totalDiskVolume = 0;
     for (var key of Object.keys(directories)){
         var directory = directories[key];
-        directory['filesize'] = dirSize = directory.files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directory, key);
+        dirSize = directory['filesize'] = 
+            directory['filesize'] ? directory['filesize'] : directory.files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directory, key);
         // part 1
         if (dirSize <=100000) {
             totalDiskVolume += dirSize;
