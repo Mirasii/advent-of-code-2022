@@ -4,7 +4,7 @@ function day7(input) {
     var closestDir = '';
     var closestDirDeviation = 30000000;
     var neededSpace = 30000000;
-    var usedSpace = directories['/'].files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directories['/'], '/');
+    var usedSpace = directories['/']['filesize'] = directories['/'].files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directories['/'], '/');
     var freeSpace = 70000000 - usedSpace;
     var spaceGiven = 0;
     // part 1
