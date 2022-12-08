@@ -27,5 +27,5 @@ $ ls
 test("day7", () => {
     const result = day7(input);
     expect(result.partOne).toBe(95437);
-    expect(result.partTwo).toBe(null);
+    expect(result.partTwo).toBe(`/d frees up enough space with an excess of 16552477 (total freed: 24933642)`);
 });

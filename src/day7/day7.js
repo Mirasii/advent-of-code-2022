@@ -17,7 +17,7 @@ function day7(input) {
             totalDiskVolume += dirSize;
         }
         // part 2
-        var differential = -(neededSpace - freeSpace - dirSize)
+        var differential =  freeSpace + dirSize - neededSpace
         if (differential > 0 && differential < closestDirDeviation) {
             closestDirDeviation = differential;
             closestDir = key;
