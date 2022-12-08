@@ -4,15 +4,14 @@ function day7(input) {
     var closestDir = '';
     var closestDirDeviation = 30000000;
     var neededSpace = 30000000;
-    var usedSpace = directories['/']['filesize'] = directories['/'].files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directories['/'], '/');
+    var usedSpace = directories['/'].files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directories['/'], '/');
     var freeSpace = 70000000 - usedSpace;
     var spaceGiven = 0;
     // part 1
     var totalDiskVolume = 0;
     for (var key of Object.keys(directories)){
         var directory = directories[key];
-        dirSize = directory['filesize'] = 
-            directory['filesize'] ? directory['filesize'] : directory.files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directory, key);
+        directory['filesize'] = dirSize = directory.files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directory, key);
         // part 1
         if (dirSize <=100000) {
             totalDiskVolume += dirSize;
