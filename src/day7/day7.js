@@ -1,81 +1,80 @@
 function day7(input) {
 
-    var structureObj = buildStructureObject(input);
+    var directories = buildStructureObject(input);
+    var closestDir = '';
+    var closestDirDeviation = 30000000;
+    var neededSpace = 30000000;
+    var usedSpace = directories['/'].files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directories['/'], '/');
+    var freeSpace = 70000000 - usedSpace;
+    var spaceGiven = 0;
     // part 1
     var totalDiskVolume = 0;
-    for (var key of Object.keys(structureObj)){
-        var level = structureObj[key];
-        for (var dirKey of Object.keys(level)) {
-            var directory = level[dirKey]
-            //console.log(`${directory.name} has a file size of ${directory.totalFileSize}`)
-            if (directory.totalFileSize <= 100000) {
-                //console.log(`${directory.name} meets criteria`)
-                totalDiskVolume += directory.totalFileSize;
-            }
+    for (var key of Object.keys(directories)){
+        var directory = directories[key];
+        var dirSize = directory.files.reduce(( total, file) => total + file.size, 0) + getChildSizes(directories, directory, key);
+        // part 1
+        if (dirSize <=100000) {
+            totalDiskVolume += dirSize;
+        }
+        // part 2
+        var differential = -(neededSpace - freeSpace - dirSize)
+        if (differential > 0 && differential < closestDirDeviation) {
+            closestDirDeviation = differential;
+            closestDir = key;
+            spaceGiven = dirSize;
         }
     }
+
     return {
         "partOne":totalDiskVolume,
-        "partTwo":null
+        "partTwo": `${closestDir} frees up enough space with an excess of ${closestDirDeviation} (total freed: ${spaceGiven})`
     }
 }
 
 function buildStructureObject(input) {
-    var consoleLines = input.replaceAll('\r', '').split('\n');
-    var parentDir = null;
-    var level = 0;
-    var structureObj = {
-        "deepestLevel":0
-    };
-    var currentObj = {};
-    //parse text to get file sizes
-    for (var line of consoleLines) {
-        if (line.includes('$')) {
-            if (line.includes('cd')) {
-                //go up one level = write this object and carry size to parent
-                if (line.includes('..')) {
-                    structureObj[level][currentObj.name] = currentObj;
-                    level--;
-                    var sizeToAdd = currentObj.totalFileSize;
-                    currentObj = structureObj[level][parentDir];
-                    currentObj.totalFileSize += sizeToAdd;
-                    parentDir = currentObj.parent;
-                //create child in next level
+    var directories = { '/': { parent: '', files: [], directories: [] } };
+
+    var currentDirectory = '';
+    input.split('\n').forEach(line => {
+        var tokens = line.split(' ');
+        if (line.startsWith('$')) {
+            if (tokens[1] == 'cd') {
+                if (tokens[2] == '/') {
+                    currentDirectory = '/';
+                } else if (tokens[2] == '..') {
+                    var paths = currentDirectory.split('/');
+                    currentDirectory = paths.slice(0, paths.length - 1).join('/');
                 } else {
-                    level++;
-                    parentDir = currentObj.name;
-                    if (level >= structureObj.deepestLevel){
-                        structureObj.deepestLevel = level;
-                        structureObj[level] = {};
-                    } 
-                    currentObj = {
-                        "name" : line.split(' ')[2],
-                        "parent" : parentDir,
-                        "files" : [],
-                        "totalFileSize" : 0
-                    }
-                    structureObj[level][currentObj.name] = currentObj;
+                    currentDirectory = (currentDirectory == '/' ? currentDirectory : currentDirectory + '/') + tokens[2];
                 }
             }
-        } else if (!line.includes('dir')) {
-            currentObj.files.push(line);
-            currentObj.totalFileSize += parseInt(line.split(' ')[0]);
+        } else {
+            if (tokens[0] == 'dir') {
+                var newDirectory = (currentDirectory == '/' ? currentDirectory : currentDirectory + '/') + tokens[1];
+                directories[newDirectory] = {
+                    parent: currentDirectory,
+                    files: [],
+                    directories: []
+                }
+
+                directories[currentDirectory].directories.push(newDirectory);
+            } else {
+                directories[currentDirectory].files.push({ file: tokens[1], size: parseInt(tokens[0]) });
+            }
         }
-    }
-    //exit out to top level to correct file sizes
-    for (level; level > 1; level--) {
-        structureObj[level][currentObj.name] = currentObj;
-        var sizeToAdd = currentObj.totalFileSize;
-        currentObj = structureObj[level-1][parentDir];
-        currentObj.totalFileSize += sizeToAdd;
-        parentDir = currentObj.parent;
-    }
-    //add final obj
-    structureObj[level][currentObj.name] = currentObj;
-    return structureObj;
+    });
+    return directories;
 }
 
-
+function getChildSizes(directories, currDir, currKey) {
+    var childSize = 0;
+    for (var child of currDir.directories) {
+        var childDir = directories[child];
+        if (childDir.files) childSize += childDir.files.reduce((total, file) => total + file.size, 0);
+        childSize += getChildSizes(directories, childDir, child);
+    }
+    return childSize;
+}
 
 module.exports = {
     day7,
