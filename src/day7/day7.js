@@ -1,14 +1,15 @@
 function day7(input) {
 
     var structureObj = buildStructureObject(input);
-    console.log(structureObj);
     // part 1
     var totalDiskVolume = 0;
     for (var key of Object.keys(structureObj)){
         var level = structureObj[key];
         for (var dirKey of Object.keys(level)) {
             var directory = level[dirKey]
+            //console.log(`${directory.name} has a file size of ${directory.totalFileSize}`)
             if (directory.totalFileSize <= 100000) {
+                //console.log(`${directory.name} meets criteria`)
                 totalDiskVolume += directory.totalFileSize;
             }
         }
@@ -27,9 +28,11 @@ function buildStructureObject(input) {
         "deepestLevel":0
     };
     var currentObj = {};
+    //parse text to get file sizes
     for (var line of consoleLines) {
         if (line.includes('$')) {
             if (line.includes('cd')) {
+                //go up one level = write this object and carry size to parent
                 if (line.includes('..')) {
                     structureObj[level][currentObj.name] = currentObj;
                     level--;
@@ -37,6 +40,7 @@ function buildStructureObject(input) {
                     currentObj = structureObj[level][parentDir];
                     currentObj.totalFileSize += sizeToAdd;
                     parentDir = currentObj.parent;
+                //create child in next level
                 } else {
                     level++;
                     parentDir = currentObj.name;
@@ -58,6 +62,15 @@ function buildStructureObject(input) {
             currentObj.totalFileSize += parseInt(line.split(' ')[0]);
         }
     }
+    //exit out to top level to correct file sizes
+    for (level; level > 1; level--) {
+        structureObj[level][currentObj.name] = currentObj;
+        var sizeToAdd = currentObj.totalFileSize;
+        currentObj = structureObj[level-1][parentDir];
+        currentObj.totalFileSize += sizeToAdd;
+        parentDir = currentObj.parent;
+    }
+    //add final obj
     structureObj[level][currentObj.name] = currentObj;
     return structureObj;
 }
